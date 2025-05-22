@@ -100,4 +100,22 @@ class PostController extends Controller
 
         return "Post ID: {$id} updated successfully!";
     }
+
+    public function deletePost($id)
+    {
+        $post = Post::find($id);
+        if (!$post) {
+            return "Post not found to delete!";
+        }
+        $post->delete();
+
+        // 或者直接通过主键删除 (返回删除的记录数)
+        // $deletedRows = Post::destroy($id);
+        // $deletedRows = Post::destroy([1, 2, 3]); // 删除多个
+
+        // 或者通过查询条件删除
+        // Post::where('is_published', false)->delete();
+
+        return "Post ID: {$id} deleted successfully!";
+    }
 }
